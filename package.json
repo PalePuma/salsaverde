@@ -1,0 +1,19 @@
+{
+  "name": "salsaverde",
+  "version": "1.0.0",
+  "description": "Tic-tac-toe",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PalePuma/salsaverde.git"
+  },
+  "author": "David and Joel Christophel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PalePuma/salsaverde/issues"
+  },
+  "homepage": "https://github.com/PalePuma/salsaverde#readme"
+}
