@@ -1,0 +1,26 @@
+{
+  "name": "salsaverde",
+  "version": "1.0.0",
+  "description": "Tic-tac-toe",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PalePuma/salsaverde.git"
+  },
+  "author": "David and Joel Christophel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PalePuma/salsaverde/issues"
+  },
+  "homepage": "https://github.com/PalePuma/salsaverde#readme",
+  "devDependencies": {
+    "eslint": "^7.10.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-import": "^2.22.1",
+    "prettier": "2.1.2"
+  }
+}
