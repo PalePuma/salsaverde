@@ -1,3 +1,4 @@
+const game = { turnPlayer: 0 };
 let cells;
 
 function getCellCoordinates(cell) {
@@ -5,8 +6,23 @@ function getCellCoordinates(cell) {
   return { row: Math.floor(index / 3), column: index % 3 };
 }
 
+function initializeBoard() {
+  game.board = [[], [], []];
+}
+
+function recordTurn(coordinates) {
+  game.board[coordinates.row][coordinates.column] = game.turnPlayer;
+  game.changedCoordinates = coordinates;
+}
+
+function toggleTurnPlayer() {
+  game.turnPlayer = game.turnPlayer === 0 ? 1 : 0;
+}
+
 function onCellClicked(e) {
   const coordinates = getCellCoordinates(e.target);
+  recordTurn(coordinates);
+  toggleTurnPlayer();
 }
 
 function registerCellClickListeners() {
@@ -16,6 +32,7 @@ function registerCellClickListeners() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  initializeBoard();
   cells = [...document.querySelectorAll('.hash-board span')];
   registerCellClickListeners();
 });
