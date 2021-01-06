@@ -131,7 +131,13 @@ body {
 
 .bottom-bar,
 .toggle-tab,
-.toggle-tab span {
+.toggle-tab span,
+.expanded-position {
+  bottom: -4.3rem;
+  transition: 350ms ease-in-out;
+}
+
+.expanded-position {
   bottom: 0;
 }
 

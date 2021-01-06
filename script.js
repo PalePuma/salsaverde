@@ -14,6 +14,8 @@ const diagonals = [
 ];
 let gamesPlayed = 0;
 let cells;
+let footer;
+let toggleIndicator;
 
 function getCellCoordinates(cell) {
   const index = cells.indexOf(cell);
@@ -100,7 +102,44 @@ function registerCellClickListeners() {
   );
 }
 
+function registerToggleClickListener() {
+  toggleIndicator.addEventListener('click', onToggleClicked);
+}
+
+function onToggleClicked() {
+  switchSymbol();
+  footer.forEach((element) => {
+    element.classList.toggle('expanded-position');
+  });
+}
+
+/* Unicode Characters
+    «
+    Left-Pointing Double Angle Quotation Mark
+     UTF-16: 0x00AB
+    Decimal: 171
+   
+    »
+    Right-Pointing Double Angle Quotation Mark
+     UTF-16: 0x00BB
+    Decimal: 187
+*/
+function switchSymbol() {
+  toggleIndicator.innerHTML =
+    toggleIndicator.innerHTML.codePointAt(0) === 187
+      ? String.fromCharCode(171)
+      : String.fromCharCode(187);
+
+  // toggle tooltip hover text
+  const newTitle =
+    toggleIndicator.getAttribute('title') === 'Show' ? 'Hide' : 'Show';
+  toggleIndicator.setAttribute('title', newTitle);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   cells = [...document.querySelectorAll('.hash-board span')];
+  footer = Array.from(document.querySelectorAll('footer')[0].children);
+  [toggleIndicator] = Array.from(document.querySelectorAll('.toggle-tab span'));
   initializeBoard();
+  registerToggleClickListener();
 });
