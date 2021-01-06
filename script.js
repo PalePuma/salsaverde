@@ -1,5 +1,25 @@
+let gamesPlayed = 0;
 const game = { turnPlayer: 0 };
-const players = [{ score: 0 }, { score: 0 }];
+const players = [
+  {
+    name: {
+      value: 'Player 1',
+      displayElement: null,
+      inputElement: null,
+    },
+    score: 0,
+  },
+  {
+    name: {
+      value: 'Player 2',
+      displayElement: null,
+      inputElement: null,
+    },
+    score: 0,
+  },
+];
+
+let cells;
 const diagonals = [
   [
     { row: 0, column: 0 },
@@ -12,10 +32,27 @@ const diagonals = [
     { row: 2, column: 0 },
   ],
 ];
-let gamesPlayed = 0;
-let cells;
+
+/*
+Unicode Characters
+    «
+    Left-Pointing Double Angle Quotation Mark
+     UTF-16: 0x00AB
+    Decimal: 171
+
+    »
+    Right-Pointing Double Angle Quotation Mark
+     UTF-16: 0x00BB
+    Decimal: 187
+*/
+const toggle = {
+  isExpanded: false,
+  collapseCharCode: 171,
+  expandCharCode: 187,
+  collapseTitle: 'Hide',
+  expandTitle: 'Show',
+};
 let footer;
-let toggleIndicator;
 
 function getCellCoordinates(cell) {
   const index = cells.indexOf(cell);
@@ -102,44 +139,67 @@ function registerCellClickListeners() {
   );
 }
 
-function registerToggleClickListener() {
-  toggleIndicator.addEventListener('click', onToggleClicked);
+function registerToggleClickListeners() {
+  Array.from(toggle.triggerButtons).forEach((button) =>
+    button.addEventListener('click', onToggleClicked)
+  );
+}
+
+function registerTextInputListeners() {
+  players.forEach((player) =>
+    player.name.inputElement.addEventListener('input', onTextInput)
+  );
+}
+
+function onTextInput(e) {
+  if (e.target.name.includes('x')) players[0].name.value = e.target.value;
+  else players[1].name.value = e.target.value;
+  renderPills();
 }
 
 function onToggleClicked() {
-  switchSymbol();
+  toggle.isExpanded = !toggle.isExpanded;
+  renderBottomBar();
+}
+
+function renderPills() {
+  players[0].name.displayElement.innerHTML = players[0].name.value;
+  players[1].name.displayElement.innerHTML = players[1].name.value;
+}
+
+function renderBottomBar() {
+  // toggle indicator symbol
+  toggle.toggleIndicator.innerHTML = toggle.isExpanded
+    ? String.fromCharCode(toggle.collapseCharCode)
+    : String.fromCharCode(toggle.expandCharCode);
+
+  // toggle indicator tooltip
+  toggle.toggleIndicator.setAttribute(
+    'title',
+    toggle.isExpanded ? toggle.collapseTitle : toggle.expandTitle
+  );
+
+  // footer visibility animation
   footer.forEach((element) => {
     element.classList.toggle('expanded-position');
   });
 }
 
-/* Unicode Characters
-    «
-    Left-Pointing Double Angle Quotation Mark
-     UTF-16: 0x00AB
-    Decimal: 171
-   
-    »
-    Right-Pointing Double Angle Quotation Mark
-     UTF-16: 0x00BB
-    Decimal: 187
-*/
-function switchSymbol() {
-  toggleIndicator.innerHTML =
-    toggleIndicator.innerHTML.codePointAt(0) === 187
-      ? String.fromCharCode(171)
-      : String.fromCharCode(187);
-
-  // toggle tooltip hover text
-  const newTitle =
-    toggleIndicator.getAttribute('title') === 'Show' ? 'Hide' : 'Show';
-  toggleIndicator.setAttribute('title', newTitle);
-}
-
 document.addEventListener('DOMContentLoaded', () => {
+  players[0].name.displayElement = document.querySelector(
+    '.x-player .player-name-text'
+  );
+  players[1].name.displayElement = document.querySelector(
+    '.o-player .player-name-text'
+  );
+  players[0].name.inputElement = document.querySelector('.input-pill.x-player');
+  players[1].name.inputElement = document.querySelector('.input-pill.o-player');
   cells = [...document.querySelectorAll('.hash-board span')];
-  footer = Array.from(document.querySelectorAll('footer')[0].children);
-  [toggleIndicator] = Array.from(document.querySelectorAll('.toggle-tab span'));
+  toggle.toggleIndicator = document.querySelector('.toggle-tab span');
+  toggle.triggerButtons = document.getElementsByClassName('toggle-trigger');
+  footer = Array.from(document.querySelector('footer').children);
+
   initializeBoard();
-  registerToggleClickListener();
+  registerToggleClickListeners();
+  registerTextInputListeners();
 });
