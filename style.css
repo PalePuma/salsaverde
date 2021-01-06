@@ -17,6 +17,7 @@
 
 body {
   background: tan;
+  font-family: sans-serif;
 }
 
 .main-content {
@@ -275,4 +276,52 @@ hr::after {
 #i {
   grid-area: 3 / 3 / 4 / 4;
   background: indigo;
+}
+
+fieldset,
+input {
+  border-style: none;
+}
+
+fieldset {
+  display: flex;
+  width: 400px;
+}
+
+.p2label {
+  font-size: 0.9rem;
+  line-height: 1.5rem;
+  padding: 0.7rem 0.9rem;
+  color: #99a3ba;
+  background: #eef4ff;
+  border: 1px solid #cdd9ed;
+  border-radius: 0.3rem 0 0 0.3rem;
+
+  transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
+}
+
+.p2input {
+  width: 100%;
+  color: #99a3ba;
+  font-size: 0.9rem;
+  font-family: inherit;
+  line-height: 1.5rem;
+  padding: 0.5rem 1rem;
+  border-width: 1px 1px 1px 0;
+  border-style: solid;
+  border-color: #cdd9ed;
+  border-radius: 0 0.3rem 0.3rem 0;
+
+  transition: border 0.3s ease;
+}
+
+fieldset:focus-within .p2label {
+  color: white;
+  background: #678efe;
+  border-color: #275efe;
+}
+
+.p2input:focus {
+  outline: none;
+  border-color: #275efe;
 }
