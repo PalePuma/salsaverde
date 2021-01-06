@@ -8,7 +8,11 @@
   --rect-height: 4.5rem;
   --round-corners: 2rem;
   --pill-inside-margin: -5vw;
-  --pill-text-color: yellow;
+  --pill-end-max-width: 15.2%;
+  --edit-icon-size: 1rem;
+  --edit-icon-padding: 0.4rem;
+  --body-background-color: #f6e9d1;
+  --pill-text-color: var(--body-background-color);
   --x-color-faint: #c4d5bf;
   --x-color-light: lightseagreen;
   --x-color-medium: teal;
@@ -22,7 +26,6 @@
   --label-focus-text-color: white;
   --bar-border-color: firebrick;
   --bar-background-color: #fcc8ae;
-  --body-background-color: #f6e9d1;
   --toggle-tab-width: 2.25rem;
   --icon-size: 2.3rem;
   /* Together, the following two variables control the thickness of the
@@ -83,41 +86,44 @@ body {
 
 .pill-section {
   flex-grow: 1;
+  display: flex;
+  align-items: flex-end;
+  max-width: none;
+  padding: 0;
+  font-size: calc(1rem + 0.3vw);
+  line-height: var(--rect-height);
+
   color: var(--pill-text-color);
   font-family: sans-serif;
   font-weight: bold;
   text-align: center;
-  line-height: var(--rect-height);
+  text-shadow: 0px 0px 2px #666666;
 }
 
-/********************
-       X Player      
- ********************/
-.x-player .mark {
-  background: var(--x-color-light);
+.mark {
+  padding: 0 1.2% 0 5.1%;
+  font-size: calc(2.1rem + 1.3vw);
+  max-width: var(--pill-end-max-width);
 }
 
-.x-player .player-name {
-  background: var(--x-color-medium);
+.player-name-text {
+  width: 100%;
+  margin-left: calc(-1 * (var(--edit-icon-size) + var(--edit-icon-padding)));
 }
 
-.x-player .score {
-  background: var(--x-color-dark);
+.edit-button {
+  z-index: 1;
+  height: 1.4rem;
+  padding-left: var(--edit-icon-padding);
+  font-size: var(--edit-icon-size);
+  line-height: 100%;
+  color: inherit;
+  text-decoration: none;
 }
 
-/********************
-       O Player      
- ********************/
-.o-player .mark {
-  background: var(--o-color-light);
-}
-
-.o-player .player-name {
-  background: var(--o-color-medium);
-}
-
-.o-player .score {
-  background: var(--o-color-dark);
+.score {
+  padding: 0 0 0 7%;
+  max-width: var(--pill-end-max-width);
 }
 
 .toggle-tab {
@@ -198,28 +204,6 @@ fieldset {
   transition: background 300ms ease, border 300ms ease, color 300ms ease;
 }
 
-.x-player label {
-  background: var(--x-color-faint);
-  border-color: #9bb793;
-}
-
-.o-player label {
-  background: var(--o-color-faint);
-  border-color: #e99e70;
-}
-
-.x-player.input-pill:focus-within label {
-  color: var(--label-focus-text-color);
-  background: var(--x-color-medium);
-  border-color: var(--x-color-dark);
-}
-
-.o-player.input-pill:focus-within label {
-  color: var(--label-focus-text-color);
-  background: var(--o-color-medium);
-  border-color: var(--o-color-dark);
-}
-
 .text-field {
   color: var(--input-text-color);
   font-family: sans-serif;
@@ -243,7 +227,7 @@ fieldset {
   height: 61px;
   display: flex;
   align-items: center;
-  margin: -1px 1.7% 0;
+  margin: -1px 5% 0;
   padding: 0 2rem 0 1.5rem;
 
   color: #f0beb3;
@@ -270,6 +254,63 @@ fieldset {
 .button-text {
   font-size: 1.1rem;
   padding-left: 0.1rem;
+}
+
+/********************
+       X Player      
+ ********************/
+.x-player .mark {
+  line-height: 4.8rem;
+  color: var(--x-color-dark);
+  background: var(--x-color-light);
+  text-shadow: 0px 1px 3px #93d0bf;
+}
+
+.x-player .player-name {
+  background: var(--x-color-medium);
+}
+
+.x-player .score {
+  background: var(--x-color-dark);
+}
+
+.x-player label {
+  background: var(--x-color-faint);
+  border-color: #9bb793;
+}
+
+.x-player.input-pill:focus-within label {
+  color: var(--label-focus-text-color);
+  background: var(--x-color-medium);
+  border-color: var(--x-color-dark);
+}
+
+/********************
+       O Player      
+ ********************/
+.o-player .mark {
+  color: var(--o-color-dark);
+  background: var(--o-color-light);
+  text-shadow: 0 1px 4px #fbaf50;
+}
+
+.o-player .player-name {
+  background: var(--o-color-medium);
+}
+
+.o-player .score {
+  background: var(--o-color-dark);
+}
+
+.o-player label {
+  background: var(--o-color-faint);
+  border-color: #e99e70;
+}
+
+.o-player.input-pill:focus-within label {
+  color: var(--label-focus-text-color);
+  background: var(--o-color-medium);
+  border-color: var(--o-color-dark);
 }
 
 .board-sizing-utility {
