@@ -8,7 +8,15 @@
   --rect-height: 4.5rem;
   --round-corners: 2rem;
   --pill-inside-margin: -5vw;
-  --pill-details: greenyellow;
+  --pill-text-color: yellow;
+  --x-color-light: lightseagreen;
+  --x-color-medium: teal;
+  --x-color-dark: darkslategray;
+  --o-color-light: darkorange;
+  --o-color-medium: chocolate;
+  --o-color-dark: sienna;
+  --bar-border-color: royalblue;
+  --bar-background-color: lightskyblue;
   /* Together, the following two variables control the thickness of the
 	   board lines. Changing the thickness requires updating both variables. */
   --grid-gap: 7.8%;
@@ -65,30 +73,43 @@ body {
   margin-left: var(--pill-inside-margin);
 }
 
-.pill-mark,
-.pill-name,
-.pill-score {
+.pill-section {
   flex-grow: 1;
+  color: var(--pill-text-color);
   font-family: sans-serif;
   font-weight: bold;
   text-align: center;
   line-height: var(--rect-height);
-
-  color: var(--pill-details);
 }
 
-.pill-mark {
-  background: teal;
+/********************
+       X Player      
+ ********************/
+.x-player .mark {
+  background: var(--x-color-light);
 }
 
-.pill-name {
-  background: seagreen;
-  border: solid var(--pill-details);
-  border-width: 0px 4px;
+.x-player .player-name {
+  background: var(--x-color-medium);
 }
 
-.pill-score {
-  background: darkslategray;
+.x-player .score {
+  background: var(--x-color-dark);
+}
+
+/********************
+       O Player      
+ ********************/
+.o-player .mark {
+  background: var(--o-color-light);
+}
+
+.o-player .player-name {
+  background: var(--o-color-medium);
+}
+
+.o-player .score {
+  background: var(--o-color-dark);
 }
 
 .toggle-tab {
@@ -98,13 +119,13 @@ body {
   height: 6.7rem;
   width: 2.21rem;
 
-  color: royalblue;
-  background: lightskyblue;
+  color: var(--bar-border-color);
+  background: var(--bar-background-color);
   text-decoration: none;
   font: bold 1.8rem sans-serif;
   border-width: 3px 3px 0 3px;
   border-style: solid;
-  border-color: royalblue;
+  border-color: var(--bar-border-color);
   border-radius: 2rem 2rem 0 0;
 }
 
@@ -123,10 +144,10 @@ body {
   right: 1.5rem;
   height: var(--rect-height);
 
-  background: lightskyblue;
+  background: var(--bar-background-color);
   border-width: 3px 3px 0px 0px;
   border-style: solid;
-  border-color: royalblue;
+  border-color: var(--bar-border-color);
   border-radius: 0 var(--round-corners) 0 0;
 }
 
@@ -219,7 +240,7 @@ hr::after {
 }
 
 /********************
-    Tiles / Cells    
+        Cells        
  ********************/
 #a,
 #b,
