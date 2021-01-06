@@ -9,14 +9,18 @@
   --round-corners: 2rem;
   --pill-inside-margin: -5vw;
   --pill-text-color: yellow;
+  --x-color-faint: #90e1d5;
   --x-color-light: lightseagreen;
   --x-color-medium: teal;
   --x-color-dark: darkslategray;
   --o-color-light: darkorange;
   --o-color-medium: chocolate;
   --o-color-dark: sienna;
-  --bar-border-color: royalblue;
-  --bar-background-color: lightskyblue;
+  --input-text-color: #494e59;
+  --input-background-color: #fffae5;
+  --bar-border-color: #c51212;
+  --bar-background-color: #ffc8a8;
+  --body-background-color: #f4e3c3;
   /* Together, the following two variables control the thickness of the
 	   board lines. Changing the thickness requires updating both variables. */
   --grid-gap: 7.8%;
@@ -24,7 +28,7 @@
 }
 
 body {
-  background: tan;
+  background: var(--body-background-color);
   font-family: sans-serif;
 }
 
@@ -138,6 +142,18 @@ body {
   margin: 1.6rem 0 0 -1.95rem;
 }
 
+.bottom-bar,
+.toggle-tab,
+.toggle-tab span,
+.expanded-position {
+  bottom: -4.3rem;
+  transition: 350ms ease-in-out;
+}
+
+.expanded-position {
+  bottom: 0;
+}
+
 .bottom-bar {
   position: fixed;
   left: 3.9rem;
@@ -151,16 +167,57 @@ body {
   border-radius: 0 var(--round-corners) 0 0;
 }
 
-.bottom-bar,
-.toggle-tab,
-.toggle-tab span,
-.expanded-position {
-  bottom: -4.3rem;
-  transition: 350ms ease-in-out;
+fieldset {
+  border-style: none;
 }
 
-.expanded-position {
-  bottom: 0;
+.input-pill {
+  display: flex;
+  height: 2.4rem;
+  padding: 0;
+  margin: 1rem 0 0 3rem;
+}
+
+.text-field-label {
+  color: var(--input-text-color);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  white-space: nowrap;
+  padding: 0.4rem 0.4rem 0.4rem 0.7rem;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: var(--round-corners) 0 0 var(--round-corners);
+  transition: background 300ms ease, border 300ms ease, color 300ms ease;
+}
+
+.x-player label {
+  background: var(--x-color-faint);
+  border-color: #76b8ae;
+}
+
+.input-pill:focus-within label {
+  color: white;
+  background: var(--x-color-medium);
+  border-color: var(--x-color-dark);
+}
+
+.text-field {
+  color: var(--input-text-color);
+  font-family: sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5rem;
+  padding: 0 0.6rem;
+  border-width: 1px 1px 1px 0;
+  border-style: solid;
+  border-color: var(--input-background-color);
+  border-radius: 0 var(--round-corners) var(--round-corners) 0;
+  background: var(--input-background-color);
+  transition: border 300ms ease;
+}
+
+.text-field:focus {
+  outline: none;
+  border-color: var(--bar-border-color);
 }
 
 .board-sizing-utility {
@@ -297,52 +354,4 @@ hr::after {
 #i {
   grid-area: 3 / 3 / 4 / 4;
   background: indigo;
-}
-
-fieldset,
-input {
-  border-style: none;
-}
-
-fieldset {
-  display: flex;
-  width: 400px;
-}
-
-.p2label {
-  font-size: 0.9rem;
-  line-height: 1.5rem;
-  padding: 0.7rem 0.9rem;
-  color: #99a3ba;
-  background: #eef4ff;
-  border: 1px solid #cdd9ed;
-  border-radius: 0.3rem 0 0 0.3rem;
-
-  transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
-}
-
-.p2input {
-  width: 100%;
-  color: #99a3ba;
-  font-size: 0.9rem;
-  font-family: inherit;
-  line-height: 1.5rem;
-  padding: 0.5rem 1rem;
-  border-width: 1px 1px 1px 0;
-  border-style: solid;
-  border-color: #cdd9ed;
-  border-radius: 0 0.3rem 0.3rem 0;
-
-  transition: border 0.3s ease;
-}
-
-fieldset:focus-within .p2label {
-  color: white;
-  background: #678efe;
-  border-color: #275efe;
-}
-
-.p2input:focus {
-  outline: none;
-  border-color: #275efe;
 }
