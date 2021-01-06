@@ -9,18 +9,22 @@
   --round-corners: 2rem;
   --pill-inside-margin: -5vw;
   --pill-text-color: yellow;
-  --x-color-faint: #90e1d5;
+  --x-color-faint: #c4d5bf;
   --x-color-light: lightseagreen;
   --x-color-medium: teal;
   --x-color-dark: darkslategray;
+  --o-color-faint: #feb78c;
   --o-color-light: darkorange;
   --o-color-medium: chocolate;
   --o-color-dark: sienna;
-  --input-text-color: #494e59;
+  --input-text-color: #41483f;
   --input-background-color: #fffae5;
-  --bar-border-color: #c51212;
-  --bar-background-color: #ffc8a8;
-  --body-background-color: #f4e3c3;
+  --label-focus-text-color: white;
+  --bar-border-color: firebrick;
+  --bar-background-color: #fcc8ae;
+  --body-background-color: #f6e9d1;
+  --toggle-tab-width: 2.25rem;
+  --icon-size: 2.3rem;
   /* Together, the following two variables control the thickness of the
 	   board lines. Changing the thickness requires updating both variables. */
   --grid-gap: 7.8%;
@@ -121,7 +125,7 @@ body {
   position: fixed;
   left: 1.5rem;
   height: 6.7rem;
-  width: 2.21rem;
+  width: var(--toggle-tab-width);
 
   color: var(--bar-border-color);
   background: var(--bar-background-color);
@@ -156,15 +160,20 @@ body {
 
 .bottom-bar {
   position: fixed;
-  left: 3.9rem;
-  right: 1.5rem;
+  overflow: hidden;
   height: var(--rect-height);
-
+  left: 3.93rem;
+  right: 1.5rem;
+  padding-right: var(--toggle-tab-width);
   background: var(--bar-background-color);
   border-width: 3px 3px 0px 0px;
   border-style: solid;
   border-color: var(--bar-border-color);
   border-radius: 0 var(--round-corners) 0 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 fieldset {
@@ -175,7 +184,6 @@ fieldset {
   display: flex;
   height: 2.4rem;
   padding: 0;
-  margin: 1rem 0 0 3rem;
 }
 
 .text-field-label {
@@ -192,13 +200,24 @@ fieldset {
 
 .x-player label {
   background: var(--x-color-faint);
-  border-color: #76b8ae;
+  border-color: #9bb793;
 }
 
-.input-pill:focus-within label {
-  color: white;
+.o-player label {
+  background: var(--o-color-faint);
+  border-color: #e99e70;
+}
+
+.x-player.input-pill:focus-within label {
+  color: var(--label-focus-text-color);
   background: var(--x-color-medium);
   border-color: var(--x-color-dark);
+}
+
+.o-player.input-pill:focus-within label {
+  color: var(--label-focus-text-color);
+  background: var(--o-color-medium);
+  border-color: var(--o-color-dark);
 }
 
 .text-field {
@@ -218,6 +237,39 @@ fieldset {
 .text-field:focus {
   outline: none;
   border-color: var(--bar-border-color);
+}
+
+.restart-button {
+  height: 61px;
+  display: flex;
+  align-items: center;
+  margin: -1px 1.7% 0;
+  padding: 0 2rem 0 1.5rem;
+
+  color: #f0beb3;
+  background: #7b2823;
+  font-weight: bold;
+  text-decoration: none;
+  border: 6px solid #ff9e81;
+  border-radius: 3rem;
+}
+
+.restart-button:hover {
+  color: white;
+  background: #981717;
+  border-color: #f18c6e;
+}
+
+.button-icon {
+  padding-bottom: 0.2rem;
+  width: var(--icon-size);
+  font-size: var(--icon-size);
+  line-height: var(--icon-size);
+}
+
+.button-text {
+  font-size: 1.1rem;
+  padding-left: 0.1rem;
 }
 
 .board-sizing-utility {
