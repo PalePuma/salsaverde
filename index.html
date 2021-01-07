@@ -9,10 +9,13 @@
   <body>
     <main class="main-content">
       <section class="pill-flex-container">
-        <div class="pill first-pill">
-          <span class="pill-mark">mark</span>
-          <span class="pill-name">name</span>
-          <span class="pill-score">score</span>
+        <div class="pill first-pill x-player">
+          <span class="pill-section mark">&#10799;</span>
+          <span class="pill-section player-name">
+            <a href="#" class="edit-button toggle-trigger">&#9998;</a>
+            <span class="player-name-text">Player 1</span>
+          </span>
+          <span class="pill-section score">9</span>
         </div>
       </section>
       <section class="board-flex-container">
@@ -33,13 +36,44 @@
         </div>
       </section>
       <section class="pill-flex-container">
-        <div class="pill last-pill">
-          <span class="pill-mark">mark</span>
-          <span class="pill-name">name</span>
-          <span class="pill-score">score</span>
+        <div class="pill last-pill o-player">
+          <span class="pill-section mark">&#2918;</span>
+          <span class="pill-section player-name">
+            <a href="#" class="edit-button toggle-trigger">&#9998;</a>
+            <span class="player-name-text">Player 2</span>
+          </span>
+          <span class="pill-section score">99</span>
         </div>
       </section>
     </main>
-    <footer class="footer"></footer>
+    <footer>
+      <a href="#" class="toggle-tab toggle-trigger">
+        <span title="Show">&#187;</span>
+      </a>
+      <form class="bottom-bar">
+        <fieldset class="input-pill x-player">
+          <label class="text-field-label" for="x-player-name" >Player Name</label>
+          <input
+            type="text"
+            class="text-field"
+            name="x-player-name"
+            placeholder="name for Player 1"
+          >
+        </fieldset>
+        <a href="#" class="restart-button">
+          <span class="button-icon">&#8634;</span>
+          <span class="button-text">Restart</span>
+        </a>
+        <fieldset class="input-pill o-player">
+          <label class="text-field-label">Player Name</label>
+          <input
+            type="text"
+            class="text-field"
+            name="o-player-name"
+            placeholder="name for Player 2"
+          >
+        </fieldset>
+      </form>
+    </footer>
   </body>
 </html>

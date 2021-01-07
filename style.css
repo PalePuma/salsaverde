@@ -8,7 +8,26 @@
   --rect-height: 4.5rem;
   --round-corners: 2rem;
   --pill-inside-margin: -5vw;
-  --pill-details: greenyellow;
+  --pill-end-max-width: 15.2%;
+  --edit-icon-size: 1rem;
+  --edit-icon-padding: 0.4rem;
+  --body-background-color: #f6e9d1;
+  --pill-text-color: var(--body-background-color);
+  --x-color-faint: #c4d5bf;
+  --x-color-light: lightseagreen;
+  --x-color-medium: teal;
+  --x-color-dark: darkslategray;
+  --o-color-faint: #feb78c;
+  --o-color-light: darkorange;
+  --o-color-medium: chocolate;
+  --o-color-dark: sienna;
+  --input-text-color: #41483f;
+  --input-background-color: #fffae5;
+  --label-focus-text-color: white;
+  --bar-border-color: firebrick;
+  --bar-background-color: #fcc8ae;
+  --toggle-tab-width: 2.25rem;
+  --icon-size: 2.3rem;
   /* Together, the following two variables control the thickness of the
 	   board lines. Changing the thickness requires updating both variables. */
   --grid-gap: 7.8%;
@@ -16,7 +35,8 @@
 }
 
 body {
-  background: tan;
+  background: var(--body-background-color);
+  font-family: sans-serif;
 }
 
 .main-content {
@@ -27,20 +47,6 @@ body {
   max-height: 0;
   min-height: 0;
   width: 100%;
-}
-
-.footer {
-  position: fixed;
-  left: 2%;
-  right: 2%;
-  bottom: 0;
-  height: var(--rect-height);
-
-  background: lightskyblue;
-  border-width: 4px 4px 0px 4px;
-  border-style: solid;
-  border-color: royalblue;
-  border-radius: var(--round-corners) var(--round-corners) 0 0;
 }
 
 .pill-flex-container {
@@ -78,30 +84,233 @@ body {
   margin-left: var(--pill-inside-margin);
 }
 
-.pill-mark,
-.pill-name,
-.pill-score {
+.pill-section {
   flex-grow: 1;
+  display: flex;
+  align-items: flex-end;
+  max-width: none;
+  padding: 0;
+  font-size: calc(1rem + 0.3vw);
+  line-height: var(--rect-height);
+
+  color: var(--pill-text-color);
   font-family: sans-serif;
   font-weight: bold;
   text-align: center;
-  line-height: var(--rect-height);
-
-  color: var(--pill-details);
+  text-shadow: 0px 0px 2px #666666;
 }
 
-.pill-mark {
-  background: teal;
+.mark {
+  padding: 0 1.2% 0 5.1%;
+  font-size: calc(2.1rem + 1.3vw);
+  max-width: var(--pill-end-max-width);
 }
 
-.pill-name {
-  background: seagreen;
-  border: solid var(--pill-details);
-  border-width: 0px 4px;
+.player-name-text {
+  width: 100%;
+  margin-left: calc(-1 * (var(--edit-icon-size) + var(--edit-icon-padding)));
 }
 
-.pill-score {
-  background: darkslategray;
+.edit-button {
+  z-index: 1;
+  height: 1.4rem;
+  padding-left: var(--edit-icon-padding);
+  font-size: var(--edit-icon-size);
+  line-height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.score {
+  padding: 0 0 0 7%;
+  max-width: var(--pill-end-max-width);
+}
+
+.toggle-tab {
+  display: block;
+  position: fixed;
+  left: 1.5rem;
+  height: 6.7rem;
+  width: var(--toggle-tab-width);
+
+  color: var(--bar-border-color);
+  background: var(--bar-background-color);
+  text-decoration: none;
+  font: bold 1.8rem sans-serif;
+  border-width: 3px 3px 0 3px;
+  border-style: solid;
+  border-color: var(--bar-border-color);
+  border-radius: 2rem 2rem 0 0;
+}
+
+.toggle-tab span {
+  display: block;
+  text-align: end;
+  transform: rotate(-90deg);
+  width: 4.8rem;
+  padding: 0px 1rem 0 0;
+  margin: 1.6rem 0 0 -1.95rem;
+}
+
+.bottom-bar,
+.toggle-tab,
+.toggle-tab span,
+.expanded-position {
+  bottom: -4.3rem;
+  transition: 350ms ease-in-out;
+}
+
+.expanded-position {
+  bottom: 0;
+}
+
+.bottom-bar {
+  position: fixed;
+  overflow: hidden;
+  height: var(--rect-height);
+  left: 3.93rem;
+  right: 1.5rem;
+  padding-right: var(--toggle-tab-width);
+  background: var(--bar-background-color);
+  border-width: 3px 3px 0px 0px;
+  border-style: solid;
+  border-color: var(--bar-border-color);
+  border-radius: 0 var(--round-corners) 0 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+fieldset {
+  border-style: none;
+}
+
+.input-pill {
+  display: flex;
+  height: 2.4rem;
+  padding: 0;
+}
+
+.text-field-label {
+  color: var(--input-text-color);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  white-space: nowrap;
+  padding: 0.4rem 0.4rem 0.4rem 0.7rem;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: var(--round-corners) 0 0 var(--round-corners);
+  transition: background 300ms ease, border 300ms ease, color 300ms ease;
+}
+
+.text-field {
+  color: var(--input-text-color);
+  font-family: sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.5rem;
+  padding: 0 0.6rem;
+  border-width: 1px 1px 1px 0;
+  border-style: solid;
+  border-color: var(--input-background-color);
+  border-radius: 0 var(--round-corners) var(--round-corners) 0;
+  background: var(--input-background-color);
+  transition: border 300ms ease;
+}
+
+.text-field:focus {
+  outline: none;
+  border-color: var(--bar-border-color);
+}
+
+.restart-button {
+  height: 61px;
+  display: flex;
+  align-items: center;
+  margin: -1px 5% 0;
+  padding: 0 2rem 0 1.5rem;
+
+  color: #f0beb3;
+  background: #7b2823;
+  font-weight: bold;
+  text-decoration: none;
+  border: 6px solid #ff9e81;
+  border-radius: 3rem;
+}
+
+.restart-button:hover {
+  color: white;
+  background: #981717;
+  border-color: #f18c6e;
+}
+
+.button-icon {
+  padding-bottom: 0.2rem;
+  width: var(--icon-size);
+  font-size: var(--icon-size);
+  line-height: var(--icon-size);
+}
+
+.button-text {
+  font-size: 1.1rem;
+  padding-left: 0.1rem;
+}
+
+/********************
+       X Player      
+ ********************/
+.x-player .mark {
+  line-height: 4.8rem;
+  color: var(--x-color-dark);
+  background: var(--x-color-light);
+  text-shadow: 0px 1px 3px #93d0bf;
+}
+
+.x-player .player-name {
+  background: var(--x-color-medium);
+}
+
+.x-player .score {
+  background: var(--x-color-dark);
+}
+
+.x-player label {
+  background: var(--x-color-faint);
+  border-color: #9bb793;
+}
+
+.x-player.input-pill:focus-within label {
+  color: var(--label-focus-text-color);
+  background: var(--x-color-medium);
+  border-color: var(--x-color-dark);
+}
+
+/********************
+       O Player      
+ ********************/
+.o-player .mark {
+  color: var(--o-color-dark);
+  background: var(--o-color-light);
+  text-shadow: 0 1px 4px #fbaf50;
+}
+
+.o-player .player-name {
+  background: var(--o-color-medium);
+}
+
+.o-player .score {
+  background: var(--o-color-dark);
+}
+
+.o-player label {
+  background: var(--o-color-faint);
+  border-color: #e99e70;
+}
+
+.o-player.input-pill:focus-within label {
+  color: var(--label-focus-text-color);
+  background: var(--o-color-medium);
+  border-color: var(--o-color-dark);
 }
 
 .board-sizing-utility {
@@ -181,7 +390,7 @@ hr::after {
 }
 
 /********************
-    Tiles / Cells    
+        Cells        
  ********************/
 #a,
 #b,
